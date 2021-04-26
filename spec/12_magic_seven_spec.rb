@@ -92,26 +92,42 @@ describe MagicSeven do
   # The following tests will need you to create new instances of MagicSeven with
   # a specific value for the random_number.
   describe '#subtract_random_number' do
+    subject(:game) { described_class.new }
+    it 'returns 0' do
+      expect(game.subtract_random_number(game.random_number)).to eq(0)
+    end
   end
 
   # The #play method will always return seven! Test this game, using any
   # positive integer as the random_number. Update the context with the number.
   describe '#play' do
-    context 'when the random number is ...' do
+    context 'when the random number is 10' do
+      subject(:game) { described_class.new(10) }
       # remove the 'x' before running this test
-      xit 'will return 7' do
+      it 'has random_number set to 10' do
+        expect(game.random_number).to eq(10)
+      end
+      it 'will return 7' do
+        expect(game.play).to eq(7)
       end
     end
 
-    context 'when the random number is ...' do
+    context 'when the random number is 1' do
+      subject(:game) { described_class.new(1) }
       # remove the 'x' before running this test
-      xit 'will return 7' do
+      it 'has random_number set to 1' do
+        expect(game.random_number).to eq(1)
+      end
+      it 'will return 7' do
+        expect(game.play).to eq(7)
       end
     end
 
-    context 'when the random number is ...' do
+    context 'when the random number is 20' do
+      subject(:game) { described_class.new(20) }
       # remove the 'x' before running this test
-      xit 'will return 7' do
+      it 'will return 7' do
+        expect(game.play).to eq(7)
       end
     end
   end
