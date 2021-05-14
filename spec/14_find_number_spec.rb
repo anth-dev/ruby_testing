@@ -116,13 +116,14 @@ describe FindNumber do
     # explained above.
 
     let(:number_guessing) { double('random_number', value: 8) }
-    subject(:game_guessing) { described_class.new(0, 9, number_guessing) }
 
     # Before you write the #make_guess method:
     # Write a test that would expect #make_guess to return the average of
     # the min and max values (rounded down). Don't expect this test to be
     # able to pass as you haven't written #make_guess yet!
     context 'when min is 0 and max is 9' do
+      subject(:game_guessing) { described_class.new(0, 9, number_guessing) }
+
       it 'returns 4' do
         guess = game_guessing.make_guess
         expect(guess).to eq(4)
