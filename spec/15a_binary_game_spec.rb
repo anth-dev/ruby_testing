@@ -130,17 +130,31 @@ describe BinaryGame do
 
     context 'when user inputs an incorrect value once, then a valid input' do
       before do
+        allow(game_input).to receive(:gets).and_return('a', '3')
       end
 
-      xit 'completes loop and displays error message once' do
+      it 'completes loop and displays error message once' do
+        min = game_input.instance_variable_get(:@minimum)
+        max = game_input.instance_variable_get(:@maximum)
+        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        expect(game_input).to receive(:puts).with(error_message).once
+        game_input.player_input(min, max)
       end
     end
 
+    
+
     context 'when user inputs two incorrect values, then a valid input' do
       before do
+        allow(game_input).to receive(:gets).and_return('x', '0', '3')
       end
 
-      xit 'completes loop and displays error message twice' do
+      it 'completes loop and displays error message twice' do
+        min = game_input.instance_variable_get(:@minimum)
+        max = game_input.instance_variable_get(:@maximum)
+        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        expect(game_input).to receive(:puts).with(error_message).twice
+        game_input.player_input(min, max)
       end
     end
   end
@@ -152,16 +166,27 @@ describe BinaryGame do
   describe '#verify_input' do
     # Located inside #play_game (Looping Script Method)
     # Query Method -> Test the return value
+    subject(:game_verify) { described_class.new(3, 7) }
 
     # Note: #verify_input will only return a number if it is between?(min, max)
 
     context 'when given a valid input as argument' do
-      xit 'returns valid input' do
+      it 'returns valid input' do
+        min = game_verify.instance_variable_get(:@minimum)
+        max = game_verify.instance_variable_get(:@maximum)
+        user_input = 5
+        returned_value = game_verify.verify_input(min, max, user_input)
+        expect(returned_value).to eq(5)
       end
     end
 
     context 'when given invalid input as argument' do
-      xit 'returns nil' do
+      it 'returns nil' do
+        min = game_verify.instance_variable_get(:@minimum)
+        max = game_verify.instance_variable_get(:@maximum)
+        user_input = 1
+        returned_value = game_verify.verify_input(min, max, user_input)
+        expect(returned_value).to be_nil
       end
     end
   end
@@ -251,7 +276,11 @@ describe BinaryGame do
 
     # Write a test for the following context.
     context 'when game minimum and maximum is 100 and 600' do
-      xit 'returns 9' do
+      subject(:game_six_hundred) { described_class.new(100, 600) }
+
+      it 'returns 9' do
+        max = game_six_hundred.maximum_guesses
+        expect(max).to eq(9)
       end
     end
   end
